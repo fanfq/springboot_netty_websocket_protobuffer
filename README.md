@@ -3,7 +3,8 @@ for a demo with springboot，netty，websocket,protobuf
 
 
 协议说明
-![图片](/dist/msg.png)
+![图片](https://github.com/fanfq/springboot_netty_websocket_protobuffer/blob/master/dist/msg.png?raw=true)
+
 
 参数 | 位数 | 字节数 |  说明
 :----------- | :-----------: | -----------:| -----------:
@@ -16,7 +17,14 @@ nBodyLen                      | 8*4     |   4         |  包体长度
 arrBodySHA1                  | 8*40    |   40      |    包体原始数据(解密后)的SHA1哈希值
 arrReserved                | 8*20    |   20       |   保留20字节扩展
 
+
 分类 | 协议ID| Protobuf文件 | C2S | S2C | 说明 
 :----------- | :-----------: | -----------:| -----------:| -----------:| -----------:
- 1        |     1001    |   [KeepAliveMsg](KeepAliveMsg.proto)   |   ping |   -   |       心跳
- 1        |     1901    |   [KeepAliveMsg](KeepAliveMsg.proto)   |   -   |       pong     |      心跳
+ 1        |     1001    |   [KeepAliveMsg](https://github.com/fanfq/springboot_netty_websocket_protobuffer/blob/master/common/src/main/java/com/fc/common/socket/protobuf/KeepAliveMsg.proto)   |   ping |   -   |       心跳
+ 1        |     1901    |   [KeepAliveMsg](https://github.com/fanfq/springboot_netty_websocket_protobuffer/blob/master/common/src/main/java/com/fc/common/socket/protobuf/KeepAliveMsg.proto)   |   -   |       pong     |      心跳
+ 
+ 
+ my vchat channel [qrcode] 
+ ![qrcode](https://github.com/fanfq/springboot_netty_websocket_protobuffer/blob/master/dist/vcqrcode.jpg?raw=true)
+ 
+ [my facebook channel](https://www.facebook.com/FredChannel-100585011578160/)
