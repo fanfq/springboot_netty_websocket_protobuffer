@@ -1,0 +1,45 @@
+# 默认的profile为dev，其他环境通过指定启动参数使用不同的profile，比如：
+#   测试环境：java -jar my-spring-boot.jar --spring.profiles.active=test
+#   生产环境：java -jar my-spring-boot.jar --spring.profiles.active=prod
+
+# nohup java -jar 01_account_server-0.0.1-SNAPSHOT.jar --spring.profiles.active=test 2>&1
+
+server:
+  port: 9002
+#  tomcat:
+#    accesslog:
+#      buffered: true
+#      enabled: true
+#      file-date-format: .yyyy-MM-dd
+#      pattern: "%t %{X-Real-IP}i %h %A %l %u %r %s %b %D" #
+#      prefix: access_@project.name@
+#      rename-on-rotate: false
+#      request-attributes-enabled: false
+#      rotate: true
+#      suffix: .log
+      
+#配置项目启动的时候，使用哪个环境，开发、测试还是产品环境
+spring:
+  profiles:
+    active: dev
+
+mybatis:
+  mapperLocations: classpath:mapper/*/*.xml
+
+
+logging:
+  config: classpath:log4j2.yml
+  
+info:
+  app:
+    name: "@project.name@" #从pom.xml中获取
+    description: "@project.description@"
+    version: "@project.version@"
+    spring-boot-version: "@project.parent.version@"
+
+
+netty-websocket:
+  protocol: ws
+  host: localhost
+  port: 9902
+  path: /hall

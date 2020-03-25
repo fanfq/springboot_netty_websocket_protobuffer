@@ -1,0 +1,105 @@
+Configuration:
+  status: warn
+ 
+  Properties: # 定义全局变量
+    Property: # 缺省配置（用于开发环境）。其他环境需要在VM参数中指定，如下：
+      #(ALL<)TRACE<DEBUG<INFO<WARN<ERROR<FATAL(<OFF)
+      #测试：-Dlog.level.console=warn -Dlog.level.sbt=trace
+      #生产：-Dlog.level.console=warn -Dlog.level.sbt=info      
+      - name: log.level.console
+        value: info
+      - name: log.level.sbt
+        value: debug       
+      - name: project.name
+        value: 02_hall
+      - name: log.path
+        value: /Users/fred/Desktop/logs/${project.name} #/Users/fred/Desktop/logs/${project.name} /data/wwwlogs/${project.name}
+  Appenders:
+    Console:  #输出到控制台
+      name: CONSOLE
+      target: SYSTEM_OUT
+      ThresholdFilter:
+        level: ${sys:log.level.console} # “sys:”表示：如果VM参数中没指定这个变量值，则使用本文件中定义的缺省全局变量值
+        onMatch: ACCEPT
+        onMismatch: DENY
+      PatternLayout:
+        pattern: "[${project.name}][%-d{yyyy-MM-dd HH:mm:ss}][%p] %C.%M(%L) | %m%n"
+    RollingFile: # 输出到文件，超过128MB归档
+      - name: INFO_ROLLING_FILE
+        filters:
+          ThresholdFilter:
+            level: info
+            onMatch: ACCEPT
+            onMismatch: DENY
+        fileName: "${log.path}/info_${project.name}.log"
+        filePattern: "${log.path}/$${date:yyyy-MM}/info_${project.name}_%d{yyyy-MM-dd}-%i.log.gz"
+        PatternLayout:
+          pattern: "[${project.name}][%-d{yyyy-MM-dd HH:mm:ss}][%p] %C.%M(%L) | %m%n"
+        Policies:
+          TimeBasedTriggeringPolicy:
+            interval: 1
+          SizeBasedTriggeringPolicy:
+            size: "128 MB"
+        DefaultRolloverStrategy:
+          max: 1000
+      - name: DEBUG_ROLLING_FILE
+        filters:
+          ThresholdFilter:
+            level: debug
+            onMatch: ACCEPT
+            onMismatch: DENY
+        fileName: ${log.path}/debug_${project.name}.log
+        filePattern: "${log.path}/$${date:yyyy-MM}/debug_${project.name}_%d{yyyy-MM-dd}-%i.log.gz"
+        PatternLayout:
+          pattern: "[${project.name}][%-d{yyyy-MM-dd HH:mm:ss}][%p] %C.%M(%L) | %m%n"
+        Policies:
+          TimeBasedTriggeringPolicy:
+            interval: 1
+          SizeBasedTriggeringPolicy:
+            size: "128 MB"
+        DefaultRolloverStrategy:
+          max: 1000
+      - name: ERROR_ROLLING_FILE
+        filters:
+          ThresholdFilter:
+            level: error
+            onMatch: ACCEPT
+            onMismatch: DENY
+        fileName: ${log.path}/error_${project.name}.log
+        filePattern: "${log.path}/$${date:yyyy-MM}/error_${project.name}_%d{yyyy-MM-dd}-%i.log.gz"
+        PatternLayout:
+          pattern: "[${project.name}][%-d{yyyy-MM-dd HH:mm:ss}][%p] %C.%M(%L) | %m%n"
+        Policies:
+          TimeBasedTriggeringPolicy:
+            interval: 1
+          SizeBasedTriggeringPolicy:
+            size: "128 MB"
+        DefaultRolloverStrategy:
+          max: 1000    
+      - name: WARN_ROLLING_FILE
+        filters:
+          ThresholdFilter:
+            level: warn
+            onMatch: ACCEPT
+            onMismatch: DENY
+        fileName: ${log.path}/warn_${project.name}.log
+        filePattern: "${log.path}/$${date:yyyy-MM}/warn_${project.name}_%d{yyyy-MM-dd}-%i.log.gz"
+        PatternLayout:
+          pattern: "[${project.name}][%-d{yyyy-MM-dd HH:mm:ss}][%p] %C.%M(%L) | %m%n"
+        Policies:
+          TimeBasedTriggeringPolicy:
+            interval: 1
+          SizeBasedTriggeringPolicy:
+            size: "128 MB"
+        DefaultRolloverStrategy:
+          max: 1000     
+          
+  Loggers:
+    Root:
+      level: ${log.level.sbt}
+      AppenderRef:
+        - ref: CONSOLE
+        - ref: INFO_ROLLING_FILE
+        - ref: DEBUG_ROLLING_FILE
+        - ref: ERROR_ROLLING_FILE
+        - ref: WARN_ROLLING_FILE

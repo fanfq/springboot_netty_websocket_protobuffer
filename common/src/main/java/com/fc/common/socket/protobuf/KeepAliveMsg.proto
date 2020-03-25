@@ -1,0 +1,30 @@
+syntax ="proto3";
+
+
+package tutorial;
+option optimize_for = SPEED; //optimize_for 加快解析的速度
+option java_package = "com.fc.common.socket.msg";
+option java_outer_classname="KeepAliveMsg";
+
+message C2S
+{
+    int64 timestamp = 1; //客户端发包时的格林威治时间戳，单位毫秒
+}
+
+message S2C
+{
+    int64 timestamp = 1; //服务器回包时的格林威治时间戳，单位毫秒
+}
+
+message C2SMsg  //Request
+{
+    C2S c2s = 1;
+}
+
+message S2CMsg  //Response
+{
+    int32 code = 1;
+    string msg = 2;
+
+    S2C s2c = 3;
+}

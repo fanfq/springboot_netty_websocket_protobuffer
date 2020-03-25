@@ -1,0 +1,15 @@
+
+spring:
+  profiles: dev
+
+
+      
+logging:
+  config: classpath:log4j2-dev.yml
+
+
+netty-websocket:
+  protocol: ws
+  host: 192.168.3.149
+  port: 9902
+  path: /hall
