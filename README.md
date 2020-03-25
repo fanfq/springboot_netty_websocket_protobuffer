@@ -23,6 +23,10 @@ arrReserved                | 8*20    |   20       |   保留20字节扩展
  1        |     1001    |   [KeepAliveMsg](https://github.com/fanfq/springboot_netty_websocket_protobuffer/blob/master/common/src/main/java/com/fc/common/socket/protobuf/KeepAliveMsg.proto)   |   ping |   -   |       心跳
  1        |     1901    |   [KeepAliveMsg](https://github.com/fanfq/springboot_netty_websocket_protobuffer/blob/master/common/src/main/java/com/fc/common/socket/protobuf/KeepAliveMsg.proto)   |   -   |       pong     |      心跳
  
+author:
+
+![img](https://raw.githubusercontent.com/fanfq/creator_ws_protobuf_client/master/fred_40x40_write.png)
+ 
 follwing me!
 
 my vchat channel
