@@ -23,8 +23,9 @@ arrReserved                | 8*20    |   20       |   保留20字节扩展
  1        |     1001    |   [KeepAliveMsg](https://github.com/fanfq/springboot_netty_websocket_protobuffer/blob/master/common/src/main/java/com/fc/common/socket/protobuf/KeepAliveMsg.proto)   |   ping |   -   |       心跳
  1        |     1901    |   [KeepAliveMsg](https://github.com/fanfq/springboot_netty_websocket_protobuffer/blob/master/common/src/main/java/com/fc/common/socket/protobuf/KeepAliveMsg.proto)   |   -   |       pong     |      心跳
  
- 
- my vchat channel [qrcode] 
- ![qrcode](https://github.com/fanfq/springboot_netty_websocket_protobuffer/blob/master/dist/vcqrcode.jpg?raw=true)
- 
- [my facebook channel](https://www.facebook.com/FredChannel-100585011578160/)
+follwing me!
+
+my vchat channel
+![qrcode](https://raw.githubusercontent.com/fanfq/springboot_netty_websocket_protobuffer/master/dist/vcqrcode.jpg)
+
+[my facebook channel](https://www.facebook.com/FredChannel-100585011578160/)
