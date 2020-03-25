@@ -37,7 +37,7 @@ public class FCWebSocketHandler extends SimpleChannelInboundHandler<FCMsg> {
      * @throws Exception
      */
     @Override
-    protected void channelRead0(ChannelHandlerContext ctx, FCMsg msg) throws Exception {
+    protected void messageReceived(ChannelHandlerContext ctx, FCMsg msg) throws Exception {
         // 简单地打印出server接收到的消息
         //System.out.println("###"+ JSONObject.toJSONString(msg.getFcHeader()));
         //System.out.println("@@@"+new String(msg.getContent()));
@@ -203,4 +203,6 @@ public class FCWebSocketHandler extends SimpleChannelInboundHandler<FCMsg> {
         }
         super.userEventTriggered(ctx, evt);
     }
+
+
 }

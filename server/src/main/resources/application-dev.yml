@@ -10,6 +10,6 @@ logging:
 
 netty-websocket:
   protocol: ws
-  host: 192.168.3.149
+  host: localhost
   port: 9902
   path: /hall
