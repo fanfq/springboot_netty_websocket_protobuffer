@@ -34,7 +34,7 @@ public class FCWebSocketInitializer extends ChannelInitializer<SocketChannel> {
 
         /*
         //阿里云证书与此处配置不同，类型为PKCS12
-        SSLContext sslContext = SslUtil.createSSLContext("JKS","/root/STAR.4398.com_tomcat.jks","961573");
+        SSLContext sslContext = SslUtil.createSSLContext("JKS","/root/STAR.***.com_tomcat.jks","***");
         //SSLEngine 此类允许使用ssl安全套接层协议进行安全通信
         SSLEngine engine = sslContext.createSSLEngine();
         engine.setUseClientMode(false);
