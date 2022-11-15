@@ -13,3 +13,9 @@ netty-websocket:
   host: localhost
   port: 9902
   path: /hall
+
+socks5:
+  port: 8877
+  isAuth: true
+  username: test123
+  password: pwd789
