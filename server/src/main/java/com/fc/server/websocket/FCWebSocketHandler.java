@@ -1,6 +1,5 @@
 package com.fc.server.websocket;
 
-import com.alibaba.fastjson.JSONObject;
 import com.fc.common.socket.bean.FCHeader;
 import com.fc.common.socket.bean.FCMsg;
 import com.fc.common.socket.msg.KeepAliveMsg;

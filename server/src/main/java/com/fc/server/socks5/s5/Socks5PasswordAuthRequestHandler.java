@@ -3,6 +3,7 @@ package com.fc.server.socks5.s5;
 
 import com.fc.server.socks5.ProxyChannelTrafficShapingHandler;
 import com.fc.server.socks5.auth.PasswordAuth;
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -14,6 +15,7 @@ import io.netty.handler.codec.socksx.v5.DefaultSocks5PasswordAuthResponse;
 import io.netty.handler.codec.socksx.v5.Socks5PasswordAuthResponse;
 import io.netty.handler.codec.socksx.v5.Socks5PasswordAuthStatus;
 
+@Slf4j
 public class Socks5PasswordAuthRequestHandler extends SimpleChannelInboundHandler<DefaultSocks5PasswordAuthRequest> {
 
     private static final Logger logger = LoggerFactory.getLogger(Socks5PasswordAuthRequestHandler.class);
