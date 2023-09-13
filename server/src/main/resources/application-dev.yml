@@ -14,6 +14,8 @@ netty-websocket:
   port: 9902
   path: /hall
 
+
+#curl -v -x socks5://test123:pwd789@127.0.0.1:8877 https://devsdkapi.fanfq.com/sdk/api/req/analysis
 socks5:
   port: 8877
   isAuth: true

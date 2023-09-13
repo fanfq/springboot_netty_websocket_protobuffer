@@ -1,5 +1,6 @@
 package com.fc.server.socks5.s5;
 
+import io.netty.buffer.ByteBuf;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -20,6 +21,10 @@ import io.netty.handler.codec.socksx.v5.Socks5AddressType;
 import io.netty.handler.codec.socksx.v5.Socks5CommandResponse;
 import io.netty.handler.codec.socksx.v5.Socks5CommandStatus;
 import io.netty.handler.codec.socksx.v5.Socks5CommandType;
+
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
 
 public class Socks5CommandRequestHandler extends SimpleChannelInboundHandler<DefaultSocks5CommandRequest>{
     EventLoopGroup bossGroup;
@@ -56,12 +61,35 @@ public class Socks5CommandRequestHandler extends SimpleChannelInboundHandler<Def
                         }
                     });
             logger.info("连接目标服务器");
-            ChannelFuture future = bootstrap.connect(msg.dstAddr(), msg.dstPort());
-            future.addListener(new ChannelFutureListener() {
 
+
+//            String nextHost = "106.75.145.80";
+//            int nextPort = 5454;
+//            String username = "user-a6b094fa-country-us-type-dc";
+//            String password = "e8464516";
+//
+//            byte[] usernameBytes = username.getBytes();
+//            byte[] passwordBytes = password.getBytes();
+//            byte[] ulen = {(byte) usernameBytes.length};
+//            byte[] plen = {(byte) passwordBytes.length};
+//
+//            ChannelFuture future = bootstrap.connect(nextHost, nextPort);
+//            //发送 [5,2,0,2] 进行握手协商,需要密码
+//            byte[] head = {0x05,0x02,0x00,0x02};//发送的握手字节序列
+//
+//            byte[] h5 = {0x01};
+//            byte[] datas = mergeBytes(h5,ulen,usernameBytes,plen,passwordBytes);
+
+//            future.channel().writeAndFlush(head);
+//            future.channel().writeAndFlush(datas);
+
+            ChannelFuture future = bootstrap.connect(msg.dstAddr(), msg.dstPort());
+
+            future.addListener(new ChannelFutureListener() {
                 public void operationComplete(final ChannelFuture future) throws Exception {
                     if(future.isSuccess()) {
                         logger.info("成功连接目标服务器");
+
                         clientChannelContext.pipeline().addLast(new Client2DestHandler(future));
                         Socks5CommandResponse commandResponse = new DefaultSocks5CommandResponse(Socks5CommandStatus.SUCCESS, Socks5AddressType.IPv4);
                         clientChannelContext.writeAndFlush(commandResponse);
@@ -75,6 +103,21 @@ public class Socks5CommandRequestHandler extends SimpleChannelInboundHandler<Def
         } else {
             clientChannelContext.fireChannelRead(msg);
         }
+    }
+
+
+    private static byte[] mergeBytes(byte[]... values) {
+        int lengthByte = 0;
+        for (byte[] value : values) {
+            lengthByte += value.length;
+        }
+        byte[] allBytes = new byte[lengthByte];
+        int countLength = 0;
+        for (byte[] b : values) {
+            System.arraycopy(b, 0, allBytes, countLength, b.length);
+            countLength += b.length;
+        }
+        return allBytes;
     }
 
     /**
@@ -120,7 +163,9 @@ public class Socks5CommandRequestHandler extends SimpleChannelInboundHandler<Def
 
         @Override
         public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
-            logger.info("将客户端的消息转发给目标服务器端");
+            logger.info("将客户端的消息转发给目标服务器端" + msg.toString());
+
+
             destChannelFuture.channel().writeAndFlush(msg);
         }
 
@@ -129,5 +174,7 @@ public class Socks5CommandRequestHandler extends SimpleChannelInboundHandler<Def
             logger.info("客户端断开连接,cid:{}",ctx.channel().id());
             destChannelFuture.channel().close();
         }
+
     }
+
 }
