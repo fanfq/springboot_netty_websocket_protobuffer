@@ -8,12 +8,12 @@ option java_outer_classname="KeepAliveMsg";
 
 message C2S
 {
-    int64 timestamp = 1; //客户端发包时的格林威治时间戳，单位毫秒
+    int64 timestamp = 1;
 }
 
 message S2C
 {
-    int64 timestamp = 1; //服务器回包时的格林威治时间戳，单位毫秒
+    int64 timestamp = 1;
 }
 
 message C2SMsg  //Request
